@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "download.logo.wine",
+        hostname: "beforeifly.com",
       },
     ],
   },
