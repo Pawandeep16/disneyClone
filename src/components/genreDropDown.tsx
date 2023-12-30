@@ -1,8 +1,18 @@
 import React from "react";
+import { Genres } from "../../typing";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
+import Link from "next/link";
 
-function GenreDropDown() {
-  const url =
-    "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc";
+async function GenreDropDown() {
+  const url = "https://api.themoviedb.org/3/genre/movie/list?language=en";
   const options: RequestInit = {
     method: "GET",
     headers: {
@@ -13,7 +23,28 @@ function GenreDropDown() {
       revalidate: 60 * 60 * 24,
     },
   };
-  return <div>GenreDropDown</div>;
+  const repsonse = await fetch(url, options);
+  const data = (await repsonse.json()) as Genres;
+  console.log(data.genres);
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger className="text-white flex justify-center items-center ">
+        Genre <ChevronDown className="md-1" />
+      </DropdownMenuTrigger>
+
+      <DropdownMenuContent>
+        <DropdownMenuLabel>Select a Genre</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        {data.genres.map((genre) => (
+          <DropdownMenuItem key={genre.id}>
+            <Link href={`/genre/${genre.id}?genre=${genre.name}`}>
+              {genre.name}
+            </Link>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
 }
 
 export default GenreDropDown;
