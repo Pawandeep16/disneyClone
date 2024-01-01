@@ -1,16 +1,24 @@
 import MoviesCarousel from "@/components/MoviesCarousel";
+import {
+  getPopularMovies,
+  getTopRatedMovies,
+  getUpcomingMovies,
+} from "@/lib/getMovies";
 import React from "react";
 
-export default function Home() {
+export default async function Home() {
+  const upcomingMovies = await getUpcomingMovies();
+  const topRatedMovies = await getTopRatedMovies();
+  const popularMovies = await getPopularMovies();
   return (
     <main>
-      <h1>PAwandeep Singh</h1>
+      <h1>PAwandeep Singh xdas</h1>
 
       {/* carouselBanner  */}
       <div className="flex flex-col space-y-2 xl:-mt-48 ">
-        <MoviesCarousel movies={[]} title="Upcoming" />
-        {/* <MoviesCarousel movies ={....} title = "Upcoming"/>*/}
-        {/* <MoviesCarousel movies ={....} title = "Upcoming"/>*/}
+        <MoviesCarousel movies={upcomingMovies} title="Upcoming" />
+        <MoviesCarousel movies={topRatedMovies} title="Top Rated" />
+        <MoviesCarousel movies={popularMovies} title="Popular" />
       </div>
     </main>
   );

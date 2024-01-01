@@ -6,6 +6,11 @@ const nextConfig = {
         protocol: "https",
         hostname: "beforeifly.com",
       },
+
+      {
+        protocol: "http",
+        hostname: "image.tmdb.org",
+      },
     ],
   },
 };
