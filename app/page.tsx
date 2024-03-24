@@ -1,3 +1,4 @@
+import CrouselBannerWrapper from "@/components/CrouselBannerWrapper";
 import MoviesCarousel from "@/components/MoviesCarousel";
 import {
   getPopularMovies,
@@ -11,12 +12,10 @@ export default async function Home() {
   const topRatedMovies = await getTopRatedMovies();
   const popularMovies = await getPopularMovies();
   return (
-    <main>
-      <h1>PAwandeep Singh xdas</h1>
-
-      {/* carouselBanner  */}
+    <main className="">
+      <CrouselBannerWrapper />
       <div className="flex flex-col space-y-2 xl:-mt-48 ">
-        <MoviesCarousel movies={upcomingMovies} title="Upcoming" />
+        <MoviesCarousel movies={upcomingMovies} title="Upcoming" isVertical />
         <MoviesCarousel movies={topRatedMovies} title="Top Rated" />
         <MoviesCarousel movies={popularMovies} title="Popular" />
       </div>

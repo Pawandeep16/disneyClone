@@ -3,12 +3,13 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import { ThemeProvider } from "@/components/themeprovider";
+import Home from "./page";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Disney+ Clone",
-  description: "Leaning Next.js Education Purpose Only",
+  description: "Learnig Next JS ",
 };
 
 export default function RootLayout({
@@ -26,7 +27,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-
+          {/* <Home /> */}
           {children}
         </ThemeProvider>
       </body>
