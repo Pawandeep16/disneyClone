@@ -1,17 +1,26 @@
-import React from 'react'
-type Props ={
-    params:{
-    id:string;
+import MoviesCarousel from "@/components/MoviesCarousel";
+import { getDiscoverMovies } from "@/lib/getMovies";
+import React from "react";
+type Props = {
+  params: {
+    id: string;
+  };
+  searchParams: {
+    genre: string;
+  };
 };
-searchParams:{
-    genre:string;
-}
-}
-function Genrepage({params:{id},searchParams :{genre}}:Props) {
+async function Genrepage({ params: { id }, searchParams: { genre } }: Props) {
+  const movies = await getDiscoverMovies(id);
   return (
-    <div>Welcome Genrepage Id:{id} and Gnre :{genre}</div>
-    
-  )
+    <div className=" max-w-7xl mx-auto">
+      {/* Azure functions service*/}
+      <div className="flex flex-col space-y-5 mt-32 xl:mt-42">
+        <h1 className="text-6xl font-bold px-10 ">Resulets for {genre}</h1>
+
+        <MoviesCarousel title="Genre" movies={movies} isVertical />
+      </div>
+    </div>
+  );
 }
 
-export default Genrepage
+export default Genrepage;

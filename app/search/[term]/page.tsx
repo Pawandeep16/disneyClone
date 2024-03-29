@@ -1,3 +1,5 @@
+import MoviesCarousel from "@/components/MoviesCarousel";
+import { getPopularMovies, getSearchMoives } from "@/lib/getMovies";
 import { notFound } from "next/navigation";
 import React from "react";
 type Props = {
@@ -5,17 +7,27 @@ type Props = {
     term: string;
   };
 };
-function SearchPage({ params: { term } }: Props) {
+async function SearchPage({ params: { term } }: Props) {
   // no page found
   if (!term) notFound();
   //   remove the unecessary srtings
   const termToUse = decodeURI(term);
 
   //   API call For Movies
-
+  const movies = await getSearchMoives(termToUse);
   //   API to get popular Movies
+  const popularMovies = await getPopularMovies();
 
-  return <div>Welcome to the SearchPage : {termToUse}</div>;
+  return (
+    <div className=" max-w-7xl mx-auto">
+      <div className=" flex flex-col space-y-4 mt-32 xl:mt-42">
+        <h1 className="text-6xl font-bold px-10">Results for {termToUse}</h1>
+        {/* AI suggestions */}
+        <MoviesCarousel title="Movies" movies={movies} isVertical />
+        <MoviesCarousel title="You may also like" movies={popularMovies} />
+      </div>
+    </div>
+  );
 }
 
 export default SearchPage;
